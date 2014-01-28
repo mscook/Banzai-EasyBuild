@@ -1,33 +1,44 @@
-Banzai-EasyBuild
-================
+Banzai-EasyBuild (BEB)
+======================
 
 **Banzai-EasyBuild (BEB) is for installing 3rd Party Banzai dependencies**
 
-We use the awesome EasyBuild software package to manage/install required 3rd
-party bioinformatic pacakages. For more information on EasyBuild software
-please see: http://hpcugent.github.io/easybuild/
+We use the awesome EasyBuild_ software package to manage/install required 3rd
+party bioinformatic packages. 
+
+.. _EasyBuild: http://hpcugent.github.io/easybuild/
 
 By default we have set easybuild==1.10.0 as a requirement and should be
-installed during the Banzai-EasyBuild install process.
+installed during the BEB install process.
 
 
 Boostrapping all requirements with EasyBuild
 --------------------------------------------
 
 Preliminary software:
-    * Your cluster/system will have to have the "modules" package installed. It 
-      is available at: http://modules.sourceforge.net/
-    * PIP >= 1.52. Please use: *pip --version*. If pip exists use: pip install
+    * Your cluster/system will have to have **the modules_ package installed**. 
+      For Ubuntu or derivaties: *sudo apt-get install environment-modules* 
+      should do the trick.
+    * **PIP_ >= 1.52**. Please use: *pip --version*. If pip exists use: pip install
       --upgrade pip otherwise: wget
       https://raw.github.com/pypa/pip/master/contrib/get-pip.py; python
       get-pip.py
 
+.. _modules: http://modules.sourceforge.net
+.. _PIP: http://www.pip-installer.org/en/latest/installing.html
 
-The modules package allows you to:: 
+
+The environment-modules package allows you to:: 
 
     $ module avail
     $ module list
     $ module del
+
+
+The PIP package allows you to install and manage Python
+packages::
+
+    $ pip install some-python-package
 
 
 You'll next have to clone this repository::
