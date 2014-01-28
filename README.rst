@@ -4,7 +4,10 @@ Banzai-EasyBuild (BEB)
 **Banzai-EasyBuild (BEB) is for installing 3rd Party Banzai dependencies**
 
 We use the awesome EasyBuild_ software package to manage/install required 3rd
-party bioinformatic packages. 
+party bioinformatic packages. This is done in an almost fully automated manner.
+
+.. image:: http://imgs.xkcd.com/comics/automation.png
+   :align: center
 
 .. _EasyBuild: http://hpcugent.github.io/easybuild/
 
