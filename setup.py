@@ -1,3 +1,5 @@
+# Mitchell Stanton-Cook 2014
+
 import os, sys
 from os.path import join, dirname
 
