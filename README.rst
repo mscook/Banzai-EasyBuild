@@ -98,7 +98,7 @@ Assumes that you have already performed a *beb init* and beb bootstrap::
 beb help listing
 ----------------
 
-**$ beb -h**::
+$ beb -h::
 
 usage: beb.py [-h] [-v] {init,update,bootstrap} ...
 
