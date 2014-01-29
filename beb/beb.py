@@ -20,8 +20,13 @@ Banzai-EasyBuild (BEB) init and bootstrapping methods
 import sys, os, traceback, argparse
 import time
 import subprocess
+import getpass
+import config
 
+
+BASE = '/home/%s/beb' % (getpass.getuser())
 RECIPES_GIT = 'https://github.com/mscook/BEB-recipes.git'
+BASE_EB_CONFIG = 'config/eb_config.cfg'
 
 __title__        = 'Banzai-EasyBuild'
 __version__      = '0.1'
@@ -45,8 +50,9 @@ def init_beb(args):
     """
     
     """
+    eb_cfg = config.BanzaiEBConfig()
     check_requirements()
-
+    setup_configs(get_eb_cfg_location(), setup_base_dirs(), eb_cfg)
 
 def check_requirements():
     """
@@ -62,8 +68,66 @@ def check_requirements():
         print "Missing dependencies Please install %s" % (' and '.join(deps))
         sys.exit(-1)
 
+def get_eb_cfg_location():
+    """
+    Determines the location of the EasyBuild configuration file
+   
+    :returns: the full path as a string to eb-config.cfg
+    """
+    p = subprocess.Popen(["which", 'beb'], stdout=subprocess.PIPE)
+    return p.communicate()[0].split('bin/beb\n')[0]+BASE_EB_CONFIG
 
+def setup_base_dirs():
+    """
+    Select & create the base directory and also pull down recipes
+    
+    :returns: the base directory
+    """
+    selected = raw_input(("Enter a base location (must be able to write to "
+                "it) [%s]:" % (BASE)))
+    if selected == '':
+        selected = BASE
+    selected = os.path.normpath(os.path.expanduser(selected))
+    if os.path.isdir(selected):
+        print "Base directory already exists. Exiting"
+        sys.exit(-1)
+    os.mkdir(selected)
+    original = os.getcwd()
+    os.chdir(selected)
+    os.system("git clone %s" % (RECIPES_GIT))
+    return selected
+    
+def setup_configs(cfg, base, cfg_obj):
+    """
+    Build the EasyBuild config file
 
+    :param cfg: the full path to the EasyBuild config file with this 
+                distribution
+    :param base: the full path to the EastBuild base
+    :param cfg_obj: a Banzai-EasyBuild config object
+    """
+    cfg_base = cfg.split('/')[-1]
+    cfg_out = os.path.join(base, cfg_base)
+    with open(cfg) as fin, open(cfg_out, 'w') as fout:
+        for line in fin:
+            if line.find("#buildpath=") != -1:
+                cur = os.path.join(base, "easybuild/build")
+                fout.write('%s%s\n' % (line[1:].strip(), cur))
+            elif line.find("#installpath=") != -1:
+                cur = os.path.join(base, "easybuild")
+                fout.write('%s%s\n' % (line[1:].strip(), cur))
+            elif line.find("#sourcepath=") != -1:
+                cur = os.path.join(base, "easybuild/sources")
+                fout.write('%s%s\n' % (line[1:].strip(), cur))
+            elif line.find("#repositorypath=") != -1:
+                cur = os.path.join(base, "BEB-recipes")
+                fout.write('%s%s\n' % (line[1:].strip(), cur))
+            else:
+                fout.write(line)
+    cfg_obj['cfg_location'] = cfg_out
+    cfg_obj.write_items()
+    
+    ##set $MODULEPATH.
 
 def update_beb(args):
     """
