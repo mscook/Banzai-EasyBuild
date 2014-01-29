@@ -3,4 +3,5 @@ include README.rst
 include ez_setup.py
 include AUTHORS
 include CITATION
+include eb-config/eb_config.cfg
 recursive-exclude * *.pyc
