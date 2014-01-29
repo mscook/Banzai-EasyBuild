@@ -87,8 +87,34 @@ Here we set EasyBuild_ sourcepath, buildpath, installpath (--repository,
     $ beb bootstrap 
 
 
+Updating packages
+-----------------
+
+Assumes that you have already performed a *beb init* and beb bootstrap::
+
+    $ beb update
+
+
 beb help listing
 ----------------
 
+**$ beb -h**::
 
+usage: beb.py [-h] [-v] {init,update,bootstrap} ...
 
+Banzai-EasyBuild v0.1 - A no fuss next-generation sequencing analysis stack
+bootstrapping tool (https://github.com/mscook/Banzai-EasyBuild)
+
+positional arguments:
+  {init,update,bootstrap}
+                        Available commands:
+    init                Configure EasyBuild and get current build recipes.
+    update              Check for updated build recipes and rebuild required.
+                        Assumes init has been run.
+    bootstrap           Builds the current recipes. Assumes init has been run.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -v, --verbose         Verbose output
+
+Licence: ECL 2.0 by Mitchell Stanton-Cook <m.stantoncook@gmail.com>
