@@ -90,7 +90,7 @@ Here we set EasyBuild_ sourcepath, buildpath, installpath (--repository,
 Updating packages
 -----------------
 
-Assumes that you have already performed a *beb init* and beb bootstrap::
+Assumes that you have already performed a *beb init* and *beb bootstrap*::
 
     $ beb update
 
@@ -98,7 +98,7 @@ Assumes that you have already performed a *beb init* and beb bootstrap::
 beb help listing
 ----------------
 
-$ beb -h::
+**$ beb -h**::
 
     usage: beb.py [-h] [-v] {init,update,bootstrap} ...
 
