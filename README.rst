@@ -79,11 +79,13 @@ Install instructions
     
     $ beb init
 
+
 Here we set EasyBuild_ sourcepath, buildpath, installpath (--repository,
 --repositorypath) and set $MODULEPATH.
 
 
 **5)** Boostrapping the required software::
+
     $ beb bootstrap 
 
 
