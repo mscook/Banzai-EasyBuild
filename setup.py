@@ -35,6 +35,9 @@ setup(
             'easybuild==1.10.0'
             ],
     include_package_data = True,
+    data_files           = [('', ['LICENSE', 'README.rst', 'ez_setup.py', 
+                            'AUTHORS', 'CITATION']),
+                            ('config', ['eb-config/eb_config.cfg'])],
     license              = "Educational Community License, v2.0 (ECL-2.0)",
     zip_safe             = False,
     classifiers          = (
