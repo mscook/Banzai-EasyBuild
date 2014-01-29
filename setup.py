@@ -28,6 +28,7 @@ setup(
                             "for installing 3rd party Banzai NGS pipeline "
                             "dependencies"),
     packages             = find_packages(),
+    scripts              = ['beb/beb'],
     long_description     = open(join(dirname(__file__), 'README.rst')).read(),
     url                  = beb.__url__,
     install_requires     = [
